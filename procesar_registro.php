@@ -1,8 +1,8 @@
 <?php
-// 1. Conectamos a la base de datos usando tu archivo (que ya funciona)
+//Conexion a la base de datos lol
 include 'conexion.php';
 
-// 2. Recibimos los datos del formulario HTML
+
 $nombre = $_POST['nombre'];
 $correo = $_POST['correo'];
 $contra = $_POST['contraseña']; // Usamos la ñ para cachar el dato exacto
