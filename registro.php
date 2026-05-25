@@ -1,26 +1,76 @@
+<?php
+session_start();
+// Si el usuario ya está logueado, lo mandamos directo a la bienvenida
+if (isset($_SESSION['usuario_nombre'])) {
+    header("Location: bienvenido.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro - Pasteles LOL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Pastelería Lol 🎂</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-pink-50 min-h-screen flex items-center justify-center p-4 font-sans">
 
-    <h2>Crear una cuenta en Pasteles LOL</h2>
-
-    <form action="procesar_registro.php" method="POST">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl border border-rose-100 overflow-hidden p-8">
         
-        <label>Nombre completo:</label><br>
-        <input type="text" name="nombre" required><br><br>
+        <div class="text-center mb-8">
+            <span class="text-5xl block mb-2">🧁</span>
+            <h2 class="text-3xl font-black text-stone-800 tracking-tight">Crea tu Cuenta</h2>
+            <p class="text-stone-500 text-sm mt-1">Únete a la familia Pastelería Lol y ordena tus antojos</p>
+        </div>
 
-        <label>Correo electrónico:</label><br>
-        <input type="email" name="correo" required><br><br>
+        <form action="procesar_registro.php" method="POST" class="space-y-5">
+            
+            <div>
+                <label class="block text-xs font-bold text-stone-600 uppercase tracking-wider mb-2">Nombre completo</label>
+                <input type="text" 
+                       name="nombre" 
+                       required 
+                       placeholder="Juan Pérez"
+                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:border-rose-400 focus:bg-white transition duration-200 text-sm">
+            </div>
 
-        <label>Contraseña:</label><br>
-        <input type="password" name="contraseña" required><br><br>
+            <div>
+                <label class="block text-xs font-bold text-stone-600 uppercase tracking-wider mb-2">Correo electrónico</label>
+                <input type="email" 
+                       name="correo" 
+                       required 
+                       placeholder="ejemplo@correo.com"
+                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:border-rose-400 focus:bg-white transition duration-200 text-sm">
+            </div>
 
-        <button type="submit">Registrarme</button>
-    </form>
+            <div>
+                <label class="block text-xs font-bold text-stone-600 uppercase tracking-wider mb-2">Contraseña</label>
+                <input type="password" 
+                       name="contraseña" 
+                       required 
+                       placeholder="Crea una contraseña segura"
+                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:border-rose-400 focus:bg-white transition duration-200 text-sm">
+            </div>
+
+            <div class="pt-2">
+                <button type="submit" 
+                        class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-rose-100 hover:shadow-xl transition tracking-wide text-sm">
+                    Registrarme 🎂
+                </button>
+            </div>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-stone-100 text-center">
+            <p class="text-sm text-stone-500">
+                ¿Ya tienes una cuenta? 
+                <a href="login.php" class="text-rose-500 hover:text-rose-600 font-bold ml-1 transition">
+                    Inicia sesión aquí
+                </a>
+            </p>
+        </div>
+
+    </div>
 
 </body>
 </html>

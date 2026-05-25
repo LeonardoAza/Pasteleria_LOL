@@ -12,5 +12,5 @@ if ($conexion->connect_error) {
 }
 
 // Si llega hasta aquí, imprimirá esto en tu pantalla:
-echo "¡Felicidades! La conexión a la base de datos pasteleria_lol fue un ÉXITO. 😎";
+
 ?>

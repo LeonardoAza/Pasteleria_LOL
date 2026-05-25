@@ -11,65 +11,102 @@ if (!isset($_SESSION['usuario_nombre'])) {
 // Jalamos todos los productos de la base de datos
 $sql = "SELECT * FROM productos";
 $resultado = $conexion->query($sql);
+
+// INYECTAMOS EL HEADER CON EL MENÚ INTELIGENTE
+include 'header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Catálogo de Pasteles - Pasteles LOL</title>
-    <style>
-        /* Un diseño muy básico para que no se amontone todo mientras le ponemos Bootstrap */
-        .contenedor-pasteles { display: flex; flex-wrap: wrap; gap: 20px; }
-        .tarjeta-pastel { border: 1px solid #ccc; padding: 15px; width: 250px; border-radius: 8px; text-align: center; }
-        .tarjeta-pastel img { max-width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
-        .precio { color: green; font-weight: bold; font-size: 1.2em; }
-        .agotado { color: red; font-weight: bold; }
-    </style>
-</head>
-<body>
+<div class="mb-8 text-center md:text-left">
+    <h2 class="text-3xl font-extrabold text-stone-800 tracking-tight flex items-center justify-center md:justify-start gap-2">
+         Nuestro Catálogo de Pasteles
+    </h2>
+    <p class="text-stone-600 mt-2">
+        Elige tus sabores favoritos hechos con los mejores ingredientes frescos.
+    </p>
+</div>
 
-    <h2>🍰 Nuestro Catálogo de Pasteles 🍰</h2>
-    <p>Hola, <b><?php echo $_SESSION['usuario_nombre']; ?></b> (Rol: <?php echo $_SESSION['usuario_role'] ?? $_SESSION['usuario_rol']; ?>)</p>
-    <a href="bienvenido.php">Volver al Inicio</a> | <a href="cerrar_sesion.php">Cerrar Sesión</a>| <a href="ver_pedido.php" style="font-weight: bold; color: #ff4757;">Ver mi Pedido 🛒</a>
-    <hr><br>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-    <div class="contenedor-pasteles">
-
-        <?php
-        // Verificamos si hay productos en la base de datos
-        if ($resultado->num_rows > 0) {
-            // Este "while" va a repetir la tarjeta por cada pastel que encuentre
-            while ($pastel = $resultado->fetch_assoc()) {
-                ?>
-                <div class="tarjeta-pastel">
-                    <img src="imagenes/<?php echo $pastel['imagen']; ?>" alt="<?php echo $pastel['nombre_pastel']; ?>">
+    <?php
+    // Verificamos si hay productos en la base de datos
+    if ($resultado->num_rows > 0) {
+        // Este "while" va a repetir la tarjeta por cada pastel que encuentre
+        while ($pastel = $resultado->fetch_assoc()) {
+            $stock = $pastel['stock'];
+            ?>
+            
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-rose-100 flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
+                
+                <div class="relative bg-rose-50 h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover" 
+                         src="imagenes/<?php echo htmlspecialchars($pastel['imagen']); ?>" 
+                         alt="<?php echo htmlspecialchars($pastel['nombre_pastel']); ?>">
                     
-                    <h3><?php echo $pastel['nombre_pastel']; ?></h3>
-                    <p><?php echo $pastel['descripción_pastel']; ?></p>
-                    
-                    <p class="precio">$<?php echo $pastel['precio']; ?></p>
-                    
-                    <p>Disponibles: <?php echo $pastel['stock']; ?></p>
-
-                   <?php if ($pastel['stock'] > 0) { ?>
-    <a href="agregar_carrito.php?id=<?php echo $pastel['id_prod']; ?>">
-        <button type="button" style="background-color: #4CAF50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer;">
-            Agregar al Pedido 🛒
-                </button>
-                    </a>
-            <?php } else { ?>
-            <span class="agotado">Temporalmente Agotado ❌</span>
-            <?php } ?>
+                    <?php if ($stock > 0 && $stock <= 3): ?>
+                        <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow">
+                            ¡Últimas <?php echo $stock; ?> piezas!
+                        </span>
+                    <?php endif; ?>
                 </div>
-                <?php
-            }
-        } else {
-            echo "<p>No hay pasteles registrados en este momento. Vuelve más tarde.</p>";
+
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-800 line-clamp-1">
+                            <?php echo htmlspecialchars($pastel['nombre_pastel']); ?>
+                        </h3>
+                        <p class="text-sm text-stone-500 mt-2 line-clamp-2 min-h-[40px]">
+                            <?php echo htmlspecialchars($pastel['descripción_pastel']); ?>
+                        </p>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400 block font-semibold uppercase tracking-wider">Precio</span>
+                            <span class="text-2xl font-black text-rose-600">$<?php echo number_format($pastel['precio'], 2); ?></span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-stone-400 block font-semibold uppercase tracking-wider">Disponibles</span>
+                            <span class="text-sm font-bold <?php echo ($stock > 0) ? 'text-emerald-600' : 'text-red-500'; ?>">
+                                <?php echo ($stock > 0) ? $stock . ' pzas' : 'Agotado'; ?>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-5 pt-0">
+                    <?php if ($stock > 0): ?>
+                        <a href="agregar_carrito.php?id=<?php echo $pastel['id_prod']; ?>" 
+                           class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl block text-center shadow-md shadow-emerald-100 hover:shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                            <span>Agregar al Pedido</span> 🛒
+                        </a>
+                    <?php else: ?>
+                        <button disabled 
+                                class="w-full bg-stone-100 text-stone-400 font-bold py-3 px-4 rounded-xl block text-center text-sm cursor-not-allowed border border-stone-200">
+                            Temporalmente Agotado 
+                        </button>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+
+            <?php
         }
+    } else {
+        // Alerta elegante si no hay productos
         ?>
+        <div class="col-span-full bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-sm">
+            <div class="flex items-center">
+                <span class="text-xl mr-3">💡</span>
+                <p class="text-amber-800 font-medium">No hay pasteles registrados en este momento. Vuelve más tarde.</p>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
 
-    </div>
+</div>
 
-</body>
-</html>
+<?php
+// INYECTAMOS EL FOOTER CON LOS DERECHOS DE AUTOR
+include 'footer.php';
+?>
