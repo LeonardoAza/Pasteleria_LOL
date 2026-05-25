@@ -1,24 +1,24 @@
 <?php
 session_start();
 
-// 1. Si no hay un carrito creado en la sesión, lo inventamos como un arreglo vacío
+// Si no hay un carrito creado en la sesión, lo inventamos como un arreglo vacío
 if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = array();
 }
 
-// 2. Atrapamos el ID que viene desde el catálogo
+// agarrramos el id que viene de la bd
 if (isset($_GET['id'])) {
     $id_prod = $_GET['id'];
 
-    // 3. Si el pastel YA ESTABA en el carrito, le sumamos 1 a la cantidad
+    //  si el paste ya estaba enel carro le sumamos uno alav
     if (isset($_SESSION['carrito'][$id_prod])) {
         $_SESSION['carrito'][$id_prod]++;
     } else {
-        // 4. Si es la primera vez que lo agrega, empezamos la cantidad en 1
+        // si solo agregua uno pues solo 1
         $_SESSION['carrito'][$id_prod] = 1;
     }
 }
 
-// 5. Lo mandamos de regreso al catálogo instantáneamente
+//  Lo mandamos de regreso al catálogo al wey
 header("Location: catalogo.php");
 exit();

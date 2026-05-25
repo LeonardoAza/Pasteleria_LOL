@@ -1,0 +1,40 @@
+/* ==========================================================================
+   ANIMACIONES PERSONALIZADAS PARA PASTELERÍA LOL
+   ========================================================================== */
+
+/* 1. Efecto Flotante Vibrante (Ideal para emojis o logos de pasteles) */
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+.animar-flotar {
+    animation: flotar 3s ease-in-out infinite;
+}
+
+/* 2. Latido Suave (Ideal para el botón de comprar o el carrito) */
+@keyframes latido {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.05); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.05); }
+    70% { transform: scale(1); }
+}
+.animar-latido {
+    animation: latido 2s ease-in-out infinite;
+}
+
+/* 3. Entrada Suave desde Abajo (Para que las tarjetas de los pasteles aparezcan con elegancia) */
+@keyframes entrarAbajo {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.animar-entrada {
+    animation: entrarAbajo 0.6s ease-out forwards;
+}

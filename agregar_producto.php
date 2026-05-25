@@ -1,14 +1,13 @@
 <?php
 session_start();
 
-// SÚPER IMPORTANTE: Si no es admin, lo mandamos al login
+// si no es admin lo mandamos alv al login
 if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
 
 include 'conexion.php';
-// INYECTAMOS EL HEADER CON EL MENÚ DE ADMINISTRADOR
 include 'header.php';
 ?>
 
@@ -107,6 +106,6 @@ include 'header.php';
 </div>
 
 <?php
-// INYECTAMOS EL FOOTER
+
 include 'footer.php';
 ?>

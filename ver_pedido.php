@@ -2,17 +2,15 @@
 session_start();
 include 'conexion.php';
 
-// Protección: Si no ha iniciado sesión, al login.
 if (!isset($_SESSION['usuario_nombre'])) {
     header("Location: login.php");
     exit();
 }
 
-// INYECTAMOS EL HEADER CON EL MENÚ
 include 'header.php';
 ?>
 
-<div class="mb-8">
+<div class="mb-8 animar-entrada">
     <h2 class="text-3xl font-extrabold text-stone-800 tracking-tight flex items-center gap-2">
         🛒 Tu Carrito de Compras
     </h2>
@@ -20,12 +18,12 @@ include 'header.php';
 </div>
 
 <?php
-// Verificamos si el carrito tiene productos
+// Wachamos si el carrito tiene productos
 if (!empty($_SESSION['carrito'])) {
     $total_general = 0;
     ?>
     
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animar-entrada">
         
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-md border border-rose-100 overflow-hidden">
             <div class="overflow-x-auto">
@@ -41,7 +39,6 @@ if (!empty($_SESSION['carrito'])) {
                     <tbody class="divide-y divide-stone-100">
                         <?php
                         foreach ($_SESSION['carrito'] as $id_prod => $cantidad) {
-                            // Buscamos los detalles de cada pastel en la base de datos
                             $sql = "SELECT * FROM productos WHERE id_prod = '$id_prod'";
                             $res = $conexion->query($sql);
                             
@@ -112,7 +109,7 @@ if (!empty($_SESSION['carrito'])) {
 
             <div class="mt-8">
                 <a href="guardar_pedido.php" 
-                   class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-4 rounded-xl block text-center shadow-lg shadow-rose-100 hover:shadow-xl transition tracking-wide text-sm">
+                   class="animar-latido w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-4 rounded-xl text-center block shadow-md hover:shadow-lg transition">
                     Confirmar y Finalizar Pedido 🎂
                 </a>
                 <p class="text-center text-xs text-stone-400 mt-3">
@@ -125,9 +122,8 @@ if (!empty($_SESSION['carrito'])) {
 
     <?php
 } else {
-    // Alerta estilizada si el carrito está vacío
     ?>
-    <div class="max-w-md mx-auto bg-white rounded-2xl shadow-md border border-rose-100 p-8 text-center my-12">
+    <div class="max-w-md mx-auto bg-white rounded-2xl shadow-md border border-rose-100 p-8 text-center my-12 animar-entrada">
         <span class="text-5xl block mb-4">🛒</span>
         <h3 class="text-xl font-bold text-stone-800">Tu carrito está vacío</h3>
         <p class="text-stone-500 text-sm mt-2 mb-6">Parece que aún no has añadido ningún pastel a tu orden.</p>
@@ -139,6 +135,5 @@ if (!empty($_SESSION['carrito'])) {
     <?php
 }
 
-// INYECTAMOS EL FOOTER
 include 'footer.php';
 ?>

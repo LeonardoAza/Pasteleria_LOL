@@ -1,15 +1,15 @@
 <?php
-// 1. Iniciamos la sesión para que PHP pueda recordar al usuario
+// iniciamos la sesión para que PHP pueda recordar al usuario
 session_start();
 
-// 2. Conectamos a la base de datos
+
 include 'conexion.php';
 
-// 3. Recibimos los datos del formulario de login
+// recibimos los datos del loginnn
 $correo = $_POST['correo'];
 $contra = $_POST['contraseña'];
 
-// 4. Buscamos en la base de datos si coinciden el correo y la contraseña
+// buscamos en la base de datos si coinciden el correo y la contraseña y todo el pedo
 $sql = "SELECT * FROM usuarios WHERE correo = '$correo' AND contraseña = '$contra'";
 $resultado = $conexion->query($sql);
 

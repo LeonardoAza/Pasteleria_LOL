@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Si el usuario ya está logueado, lo mandamos directo a la bienvenida
+
 if (isset($_SESSION['usuario_nombre'])) {
     header("Location: bienvenido.php");
     exit();

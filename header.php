@@ -11,6 +11,8 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastelería Lol </title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/animaciones.css">
+</head>
 </head>
 <body class="bg-pink-50 min-h-screen flex flex-col font-sans">
 
@@ -19,8 +21,8 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <a href="bienvenido.php" class="text-2xl font-extrabold tracking-wider flex items-center gap-2">
-                        <span>🎂</span> Pastelería <span class="text-amber-200">Lol</span>
-                    </a>
+    <span class="animar-flotar">🎂</span> Pastelería <span class="text-amber-200">Lol</span>
+</a>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-4">
@@ -41,8 +43,9 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <?php 
                                 $cant_carrito = isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito']) : 0;
                                 if ($cant_carrito > 0) {
-                                    echo "<span class='ml-1 bg-yellow-400 text-rose-900 font-bold px-2 py-0.5 rounded-full text-xs'>$cant_carrito</span>";
-                                }
+    // Le agregamos "animate-pulse" para que el círculo brille suavemente
+    echo "<span class='animate-pulse ml-1 bg-yellow-400 text-rose-900 font-bold px-2 py-0.5 rounded-full text-xs'>$cant_carrito</span>";
+}
                                 ?>
                             </a>
                         <?php endif; ?>

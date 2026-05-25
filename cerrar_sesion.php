@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_destroy(); // Borra los datos de la sesión
-header("Location: login.php"); // Lo manda al login
+session_destroy(); // Borra los datos 
+header("Location: login.php"); // Lo manda alv a login
 exit();
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Si el usuario ya estaba logueado, lo mandamos directo a la bienvenida
+// si el usuario ya estaba se conecta, lo mandamos directo a la bienvenida
 if (isset($_SESSION['usuario_nombre'])) {
     header("Location: bienvenido.php");
     exit();
@@ -25,7 +25,7 @@ if (isset($_SESSION['usuario_nombre'])) {
         </div>
 
         <?php
-        // CAPTURA DE ERRORES: Por si quieres mandarle mensajes desde procesar_login.php
+        // captura de erroes xddd
         if (isset($_GET['error'])) {
             echo '<div class="bg-red-50 border-l-4 border-red-500 p-3 rounded-r-xl mb-6 text-sm text-red-700 font-medium flex items-center gap-2">
                     <span>❌</span> Datos incorrectos. Intenta de nuevo.

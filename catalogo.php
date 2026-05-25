@@ -2,17 +2,17 @@
 session_start();
 include 'conexion.php';
 
-// Protección: Si no ha iniciado sesión, al login.
+
 if (!isset($_SESSION['usuario_nombre'])) {
     header("Location: login.php");
     exit();
 }
 
-// Jalamos todos los productos de la base de datos
+// jalamos los prods a la base de datos ylv
 $sql = "SELECT * FROM productos";
 $resultado = $conexion->query($sql);
 
-// INYECTAMOS EL HEADER CON EL MENÚ INTELIGENTE
+
 include 'header.php';
 ?>
 
@@ -35,7 +35,7 @@ include 'header.php';
             $stock = $pastel['stock'];
             ?>
             
-            <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-rose-100 flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
+           <div class="animar-entrada bg-white rounded-2xl shadow-md overflow-hidden ...">
                 
                 <div class="relative bg-rose-50 h-48 overflow-hidden">
                     <img class="w-full h-full object-cover" 
@@ -92,7 +92,7 @@ include 'header.php';
             <?php
         }
     } else {
-        // Alerta elegante si no hay productos
+        // Alerta si no hay prodsss
         ?>
         <div class="col-span-full bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-sm">
             <div class="flex items-center">
@@ -107,6 +107,6 @@ include 'header.php';
 </div>
 
 <?php
-// INYECTAMOS EL FOOTER CON LOS DERECHOS DE AUTOR
+
 include 'footer.php';
 ?>

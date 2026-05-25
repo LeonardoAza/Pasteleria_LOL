@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-// Si no hay una sesión activa, lo pateamos de regreso al login por seguridad
+// si no esta activa la sesion lo mandamos alv a login
 if (!isset($_SESSION['usuario_nombre'])) {
     header("Location: login.php");
     exit();
 }
 
 include 'conexion.php';
-// INYECTAMOS EL HEADER CON EL MENÚ INTELIGENTE
+
 include 'header.php';
 
 $rol = $_SESSION['usuario_rol'];
@@ -91,6 +91,6 @@ $rol = $_SESSION['usuario_rol'];
 </div>
 
 <?php
-// INYECTAMOS EL FOOTER
+
 include 'footer.php';
 ?>
