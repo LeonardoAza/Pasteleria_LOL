@@ -31,7 +31,7 @@ $resultado = $conexion->query($sql);
 
     <h2>🍰 Nuestro Catálogo de Pasteles 🍰</h2>
     <p>Hola, <b><?php echo $_SESSION['usuario_nombre']; ?></b> (Rol: <?php echo $_SESSION['usuario_role'] ?? $_SESSION['usuario_rol']; ?>)</p>
-    <a href="bienvenido.php">Volver al Inicio</a> | <a href="cerrar_sesion.php">Cerrar Sesión</a>
+    <a href="bienvenido.php">Volver al Inicio</a> | <a href="cerrar_sesion.php">Cerrar Sesión</a>| <a href="ver_pedido.php" style="font-weight: bold; color: #ff4757;">Ver mi Pedido 🛒</a>
     <hr><br>
 
     <div class="contenedor-pasteles">

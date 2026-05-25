@@ -18,7 +18,8 @@ if ($resultado->num_rows > 0) {
     // Guardamos los datos del usuario en un "arreglo"
     $usuario = $resultado->fetch_assoc();
     
-    // Guardamos su nombre y su rol en la sesión de la computadora
+   // Aquí es donde guardamos los datos en la memoria de la computadora:
+    $_SESSION['id_usuario'] = $usuario['id_usuario']; // <-- ¡ESTA ES LA QUE SEGURO FALTA!
     $_SESSION['usuario_nombre'] = $usuario['nombre'];
     $_SESSION['usuario_rol'] = $usuario['rol'];
     
