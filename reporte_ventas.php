@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// SEGURIDAD: Si no ha iniciado sesión o NO es administrador, lo mandamos al login
+
 if (!isset($_SESSION['usuario_nombre']) || $_SESSION['usuario_rol'] !== 'admin') {
     header("Location: login.php");
     exit();
@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_nombre']) || $_SESSION['usuario_rol'] !== 'admin')
 include 'conexion.php';
 include 'header.php';
 
-// 1. CÁLCULO DE REPORTES (KPIs): Consultamos el total de dinero y cantidad de pedidos en tiempo real
+
 $sql_kpi = "SELECT COUNT(*) AS total_ordenes, SUM(total_pagar) AS ingresos_totales FROM pedidos";
 $res_kpi = $conexion->query($sql_kpi);
 $datos_kpi = $res_kpi->fetch_assoc();
@@ -18,7 +18,7 @@ $datos_kpi = $res_kpi->fetch_assoc();
 $total_ordenes = $datos_kpi['total_ordenes'] ?? 0;
 $ingresos_totales = $datos_kpi['ingresos_totales'] ?? 0;
 
-// 2. CONSULTA PRINCIPAL CON JOIN: Unimos 'pedidos' con 'usuarios' usando tu id_usuario
+//  JOIN lmao Unimos pedidos con usuarios usando el id usuario
 $sql_reporte = "SELECT pedidos.id_pedido, usuarios.nombre AS nombre_cliente, pedidos.fecha_pedido, pedidos.total_pagar, pedidos.estado 
                 FROM pedidos 
                 INNER JOIN usuarios ON pedidos.id_usuario = usuarios.id_usuario 
@@ -29,7 +29,7 @@ $resultado = $conexion->query($sql_reporte);
 <div class="max-w-6xl mx-auto px-4 py-6">
     
     <div class="mb-8">
-        <h2 class="text-3xl font-black text-stone-800 tracking-tight">📊 Reporte de Ventas Globales</h2>
+        <h2 class="text-3xl font-black text-stone-800 tracking-tight"> Reporte de Ventas Globales</h2>
         <p class="text-sm text-stone-500 mt-1">Historial transaccional y rendimiento económico de Pastelería Lol.</p>
     </div>
 

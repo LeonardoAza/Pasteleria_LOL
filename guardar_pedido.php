@@ -34,12 +34,12 @@ if ($conexion->query($sql_pedido) === TRUE) {
         $res_prod = $conexion->query($sql_prod);
         
         if ($res_prod->num_rows > 0) {
-            // insertamos limpio en la tabla 'detalle_pedido'
+            // insertamos limpio en la tabla detalle_pedido
             $sql_detalle = "INSERT INTO detalle_pedido (id_pedido, id_prod, cantidad) 
                             VALUES ('$id_pedido', '$id_prod', '$cantidad')";
             $conexion->query($sql_detalle);
 
-            // restamos las piezas del Stock
+            // restamos las piezas del stock q sale en el catalogoooo
             $sql_update_stock = "UPDATE productos SET stock = stock - '$cantidad' WHERE id_prod = '$id_prod'";
             $conexion->query($sql_update_stock);
         }
@@ -83,7 +83,7 @@ if ($conexion->query($sql_pedido) === TRUE) {
     </div>
 
     <?php
-    $_SESSION['carrito'] = array(); // vaciamos el carrito aquí, al final de todo
+    $_SESSION['carrito'] = array(); // vaciamos el carrito aquí al final de TODO EL PEDO
 
 } else {
     echo "<div style='color:red; font-family:sans-serif; padding:20px;'>
