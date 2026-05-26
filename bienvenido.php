@@ -52,15 +52,16 @@ $rol = $_SESSION['usuario_rol'];
                 </div>
             </a>
             
-            <div class="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm opacity-60 flex items-center gap-4">
-                <div class="bg-stone-50 text-stone-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold">
+            <a href="reporte_ventas.php" 
+               class="bg-white p-6 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md hover:border-rose-200 transition duration-200 flex items-center gap-4 group">
+                <div class="bg-amber-50 text-amber-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold group-hover:scale-105 transition">
                     📊
                 </div>
                 <div>
-                    <h4 class="font-bold text-stone-500 text-base">Panel de Ventas (Próximamente)</h4>
-                    <p class="text-xs text-stone-400 mt-0.5">Aquí podrás revisar las ganancias de los pedidos.</p>
+                    <h4 class="font-bold text-stone-800 text-base">Reporte de Ventas Globales</h4>
+                    <p class="text-xs text-stone-400 mt-0.5">Revisa el historial de pedidos y ganancias totales en tiempo real.</p>
                 </div>
-            </div>
+            </a>
         </div>
 
     <?php else: ?>
@@ -91,6 +92,5 @@ $rol = $_SESSION['usuario_rol'];
 </div>
 
 <?php
-
 include 'footer.php';
 ?>

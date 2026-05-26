@@ -21,25 +21,25 @@ foreach ($_SESSION['carrito'] as $id_prod => $cantidad) {
     }
 }
 
-// Insertamos en la tabla 'pedidos'
+// insertamos en la tabla 'pedidos'
 $sql_pedido = "INSERT INTO pedidos (id_usuario, fecha_pedido, total_pagar, estado) 
                VALUES ('$id_usuario', '$fecha_actual', '$total_general', '$estado_inicial')";
 
 if ($conexion->query($sql_pedido) === TRUE) {
     $id_pedido = $conexion->insert_id;
 
-    // Insertamos detalles y restamos stock
+    // insertamos detalles y restamos stock
     foreach ($_SESSION['carrito'] as $id_prod => $cantidad) {
         $sql_prod = "SELECT stock FROM productos WHERE id_prod = '$id_prod'";
         $res_prod = $conexion->query($sql_prod);
         
         if ($res_prod->num_rows > 0) {
-            // Insertamos limpio en la tabla 'detalle_pedido'
+            // insertamos limpio en la tabla 'detalle_pedido'
             $sql_detalle = "INSERT INTO detalle_pedido (id_pedido, id_prod, cantidad) 
                             VALUES ('$id_pedido', '$id_prod', '$cantidad')";
             $conexion->query($sql_detalle);
 
-            // Restamos las piezas del Stock
+            // restamos las piezas del Stock
             $sql_update_stock = "UPDATE productos SET stock = stock - '$cantidad' WHERE id_prod = '$id_prod'";
             $conexion->query($sql_update_stock);
         }
@@ -83,7 +83,7 @@ if ($conexion->query($sql_pedido) === TRUE) {
     </div>
 
     <?php
-    $_SESSION['carrito'] = array(); // Vaciamos el carrito aquí, al final de todo
+    $_SESSION['carrito'] = array(); // vaciamos el carrito aquí, al final de todo
 
 } else {
     echo "<div style='color:red; font-family:sans-serif; padding:20px;'>

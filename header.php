@@ -1,5 +1,5 @@
 <?php
-// Aseguramos que la sesión esté activa en cualquier página que use el header
+// aseguramos que la sesión esté activa en cualquier página que use el header
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -43,7 +43,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <?php 
                                 $cant_carrito = isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito']) : 0;
                                 if ($cant_carrito > 0) {
-    // Le agregamos "animate-pulse" para que el círculo brille suavemente
+    
     echo "<span class='animate-pulse ml-1 bg-yellow-400 text-rose-900 font-bold px-2 py-0.5 rounded-full text-xs'>$cant_carrito</span>";
 }
                                 ?>

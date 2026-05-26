@@ -13,11 +13,9 @@ $fecha = date("Y-m-d H:i:s"); // captura la fecha y hora actual de la computador
 $sql = "INSERT INTO usuarios (nombre, correo, contraseña, rol, fecha_registro) 
         VALUES ('$nombre', '$correo', '$contra', '$rol', '$fecha')";
 
-// EJECUTAMOS LA ORDEN EN LA BASE DE DATOS
+
 if ($conexion->query($sql) === TRUE) {
-    // SI TODO SALIÓ BIEN, EN LUGAR DE UN ECHO BLANCO, PINTAMOS LA TARJETA PREMIUM:
-?>
-    <!DOCTYPE html>
+    ?> <!DOCTYPE html>
     <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -59,9 +57,9 @@ if ($conexion->query($sql) === TRUE) {
 
     </body>
     </html>
-<?php
+<?php // AQUÍ VOLVEMOS A ABRIR PHP PARA EL ELSE
 } else {
-    // Si algo falla en la base de datos, te avisa aquí abajo
+    // si algo falla en la base de datos, te avisa aquí abajo
     echo "<div style='color:red; font-family:sans-serif; padding:20px;'>
             <h3>❌ Error al registrar en la base de datos:</h3>" . $conexion->error . "
           </div>";
